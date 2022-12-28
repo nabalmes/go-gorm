@@ -1,0 +1,142 @@
+{{define "title"}}
+<title>{{.Title}}</title>  
+{{end}}
+
+    {{define "content"}}
+        <div class="employee-add__modal dashboard-modal">
+            <div class="modal-container employee-modal__container">
+                <div class="modal-image">
+                    <img src="../static/assets/images/header.png" alt="">
+                    <div class="editing-img"></div>
+                    <h2 class="employee-header">Create Employee</h2>
+                    <h6 class="employee-header__desc">Fill out the form below to add Employee.</h6>
+                </div>
+                <div class="image-container">
+                    <img src="../static/assets/images/globe-land.png" alt="globe-land" class="login-image__1">
+                    <img src="../static/assets/images/globe-line.png" alt="globe-line" class="login-image__2 rotate-center">
+                    <img src="../static/assets/images/globe-line2.png" alt="globe-line2" class="login-image__3 rotate-in-center">
+                  </div>
+                <div class="modal-form__container">
+                    <div class="form-wrapper username-wrapper">
+                        <label for="username">Username</label>
+                       <input class="employee-input" id="employee_username" type="text" name="username" required>
+                       <small>Please complete this required field</small>
+                    </div>
+                    
+                    <div class="form-wrapper password-wrapper">
+                        <label for="password">Password</label>
+                       <input class="employee-input" id="employee_password" type="password" name="password" required>
+                       <small>Please complete this required field</small>
+                    </div>
+    
+
+                    <div class="form-wrapper fname-wrapper">
+                        <label for=" FirstName">First Name</label>
+                       <input class="employee-input" id="employee-firstname" type="text" name="firstname" required>
+                       <small>Please complete this required field</small>
+                    </div>
+    
+                    <div class="form-wrapper lname-wrapper">
+                        <label for="lastname">Last Name</label>
+                       <input class="employee-input" id="employee-lastname" type="text" name="lastname" required>
+                       <small>Please complete this required field</small>
+                    </div>
+    
+                    <div class="form-wrapper designation-wrapper">
+                        <label for="designation">Designation</label>
+                       <input class="employee-input" id="employee-designation" type="text" name="designation" required>
+                       <small>Please complete this required field</small>
+                    </div>
+    
+                    <div class="form-wrapper employeeType-wrapper">
+                        <label for="employeeType">Employee Type</label>
+                        <select class="employee-input"  name="employeeType" id="employeeType" required>
+                            <option value=""></option>
+                            <option value="1">Admin</option>
+                            <option value="2">Delivery</option>
+                            <option value="3">Maintenance</option>
+                        </select>
+                        <small>Please complete this required field</small>
+                    </div>
+    
+                </div>
+                <div class="button-container">
+                    <div id="employee-cancel" class="modal-btn cancel-btn">
+                        Cancel
+                    </div>
+                    <button id="employee-save" class="modal-btn save-btn">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="section-header">
+           EMPLOYEE
+        </div>
+        <div class="search-bar" data-aos="fade-left" data-aos-duration="500">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#483c3c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input id="search-bar" type="text" placeholder="Search">
+            <button id="employee-search-btn">SEARCH</button>
+        </div>
+        <div class="section-employee section-cards__container">
+            {{range .Employee}}
+            <div class="cards-wrapper reveal">
+                <div class="employee-card-header">
+                    <h3>ID: {{.ID}}</h3>
+                    <div class="cards-edit__btn" onclick="EditEmployee('{{.ID}}')">
+                        <svg width="35" height="35" fill="none" stroke="#383333" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m4.75 19.25 4.25-1 9.293-9.293a1 1 0 0 0 0-1.414l-1.836-1.836a1 1 0 0 0-1.414 0L5.75 15l-1 4.25Z"></path>
+                            <path d="M19.25 19.25h-5.5"></path>
+                        </svg>
+                    </div>
+                </div>
+                <div class="employee-image">
+                    <img src="../static/assets/img/employees/user.jpg" alt="employee image">
+                </div>
+                <div class="card-details">
+                    <div class="full-name-details card-detail">
+                     
+                        <h4 class="card-details__fname">{{.User.FirstName}} {{.User.LastName}}</h4>
+                  
+                    </div>
+
+                    <div class="designation-name-details card-detail">
+                        <span class="card-details__designation">{{.Designation}}</span>
+                    </div>
+
+                    {{if eq .EmployeeType 1}}
+                    <div class="employee-type-details card-detail">
+                        <h4>Admin</h4>
+                    </div>
+                    {{end}}
+
+                    {{if eq .EmployeeType 2}}
+                    <div class="employee-type-details card-detail">
+                       
+                        <h4>Delivery</h4>
+                    </div>
+                    {{end}}
+
+                    {{if eq .EmployeeType 3}}
+                    <div class="employee-type-details card-detail">
+                      
+                        <h4>Maintenance</h4>
+                    </div>
+                    {{end}}
+                </div>
+            </div>
+            {{end}}
+            <div class="add-employee__btn dashboard-add__btn bounce-top" onclick="createEmployee()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#ffffff"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+            </div>
+        </div>
+
+   <script src="/static/jquery/jquery.3.1.6.min.js"></script>
+   <script src="../static/js/common.js"></script>
+   <script src="../static/js/employee.js"></script>
+{{end}}

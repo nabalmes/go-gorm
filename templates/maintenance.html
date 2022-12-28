@@ -1,0 +1,256 @@
+{{define "title"}}
+<title>{{.Title}}</title>
+{{end}}
+
+{{define "content"}}
+<link rel="stylesheet" href="../static/assets/css/validator.css">
+<div class="maintenance-add__modal dashboard-modal">
+    <div class="modal-container maintenance-modal__container">
+        <div class="modal-image">
+            <img src="../static/assets/images/header.png" alt="">
+            <h2>Create Maintenance</h2>
+            <h6>Fill out the form below to add maintenance.</h6>
+        </div>
+        <div class="image-container">
+            <img src="../static/assets/images/globe-land.png" alt="globe land" class="login-image__1">
+            <img src="../static/assets/images/globe-line.png" alt="globe line" class="login-image__2 rotate-center">
+            <img src="../static/assets/images/globe-line2.png" alt="globe line 2" class="login-image__3 rotate-in-center">
+        </div>
+        <div class="modal-form__container">
+            <div class="form-wrapper code-wrapper">
+                <label for="tag_id">Tag ID</label>
+                <select name="tag_id" id="tag_id" required>
+                    <option value=""></option>
+                </select>
+                <small>Please complete this required field</small>
+            </div>
+
+            <div class="form-wrapper maintenance-type-wrapper">
+                <label for="maintenance-type">Maintenance Type</label>
+                <select name="maintenance-type" id="maintenance-type" required>
+                    <option value=""></option>
+                    <option id="scheduled" value="1">Scheduled</option>
+                    <option value="2">Emergency</option>
+                </select>
+                <main class="schedule-container">
+                    <div class="title">Choose Schedule</div>
+                    <!-- day of the month -->
+                    <div class="day">1</div>
+                    <div class="day">2</div>
+                    <div class="day">3</div>
+                    <div class="day">4</div>
+                    <div class="day">5</div>
+                    <div class="day">6</div>
+                    <div class="day">7</div>
+                    <div class="day">8</div>
+                    <div class="day">9</div>
+                    <div class="day">10</div>
+                    <div class="day">11</div>
+                    <div class="day">12</div>
+                    <div class="day">13</div>
+                    <div class="day">14</div>
+                    <div class="day">15</div>
+                    <div class="day">16</div>
+                    <div class="day">17</div>
+                    <div class="day">18</div>
+                    <div class="day">19</div>
+                    <div class="day">20</div>
+                    <div class="day">21</div>
+                    <div class="day">22</div>
+                    <div class="day">23</div>
+                    <div class="day">24</div>
+                    <div class="day">25</div>
+                    <div class="day">26</div>
+                    <div class="day">27</div>
+                    <div class="day">28</div>
+                    <div class="day">29</div>
+                    <div class="day">30</div>
+                    <div class="day">31</div>
+                  </main>
+                  <div class="repeat-switch-container">
+                      <label>Repeat</label>
+                      <label class="repeat-switch">
+                        <input class="switch-checkbox" type="checkbox">
+                        <span class="slider round"></span>
+                      </label>
+                  </div>
+                <small>Please complete this required field</small>
+            </div>
+            <div class="modal-form__del">
+                <div class="form-wrapper client-wrapper">
+                    <label for="name">Full Name / Item Name</label>
+                    <p class="deliveries-details">Jethrow</p>
+                    <small>Please complete this required field</small>
+                </div>
+
+                <div class="form-wrapper desc-wrapper">
+                    <label for="description">Description</label>
+                    <p class="deliveries-details">This is a description</p>
+                    <small>Please complete this required field</small>
+                </div>
+
+                <div class="form-wrapper code-wrapper">
+                    <label for="address">Address</label>
+                    <p class="deliveries-details">Batangas</p>
+                    <small>Please complete this required field</small>
+                </div>
+
+                <div class="form-wrapper longitude-wrapper">
+                    <label for="longitude">Longitude</label>
+                    <p class="deliveries-details">34.134123</p>
+                    <small>Please complete this required field</small>
+                </div>
+
+                <div class="form-wrapper latitude-wrapper">
+                    <label for="latitude">Latitude</label>
+                    <p class="deliveries-details">87.123123</p>
+                    <small>Please complete this required field</small>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <div id="maintenance-cancel" class="modal-btn cancel-btn">
+                Cancel
+            </div>
+            <button id="maintenance-save" class="modal-btn save-btn">
+                Save
+            </button>
+        </div>
+    </div>
+</div>
+<!-- *View Modal -->
+<div class="view-modal">
+    <div class="view-modal__container start-modal__container">
+        <div class="view-header">
+            <h3>Details</h3>
+        </div>
+        <div class="view-content">
+            <div class="view-body">
+                <!-- * Details will append here -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="start-add__modal dashboard-modal">
+    <div class="modal-container start-modal__container">
+        <div class="mobile-content">
+            <!-- *Decode Style -->
+            <div class="decode-style">
+                <select id="decoding-style" size="1" class="decoding-dropdown mobile-decoding">
+                    <option value="once">Decode once</option>
+                    <option value="continuously">Decode continuously</option>
+                </select>
+            </div>
+            <!-- *Scanner -->
+            <div class="scanner-mobile__wrapper">
+                <img class="img-scan" src="/static/assets/img/scangif4.gif" alt="">
+                <video id="video" class="scanner-mobile" src=""></video>
+            </div>
+
+            <!-- *Buttons -->
+            <div class="mobile-btns">
+                <div id="sourceSelectPanel" class="video-source">
+                    <select id="sourceSelect" class="btn-save__modal mobile-btn">
+                        <option value="" selected="selected" disabled="disabled">Camera View</option>
+                    </select>
+                </div>
+
+                <button id="startButton" class="btn-save__modal mobile-btn">Scan QR</button>
+                <button id="resetButton" class="btn-save__modal mobile-btn">Close Camera</button>
+            </div>
+        </div>
+        <div class="button-container">
+            <div id="start-cancel" class="modal-btn cancel-btn">
+                Cancel
+            </div>
+            <button id="start-save" class="modal-btn save-btn">
+                Save
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="section-header">
+    MAINTENANCE
+</div>
+<div class="search-bar" data-aos="fade-left" data-aos-duration="500">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#483c3c"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input id="search-bar" type="text" placeholder="Search">
+    <button id="maintenance-search-btn">Search</button>
+</div>
+<div class="section-maintenance section-cards__container">
+    {{range .Maintenance}}
+    <div class="cards-wrapper reveal">
+        <div class="cards-header">
+            <h4>{{.ReferenceID}}</h4>
+        </div>
+        <div class="card-details">
+
+            <div class="code-name-details card-detail">
+                <h5>Name:</h5>
+                <h4>{{.Location.Name}}</h4>
+            </div>
+
+            <div class="status-name-details card-detail">
+                <h5>Status:</h5>
+                <h4>{{.Status}}</h4>
+            </div>
+        </div>
+        <div class="buttons-container">
+            <button class="view-maintenance view-modal__btn" onclick="viewDetailMain({{.ID}})">View</button>
+            <!-- <button id="end-btn">End</button> -->
+        </div>
+    </div>
+    {{end}}
+    <div class="add-maintenance__btn dashboard-add__btn bounce-top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#ffffff"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+    </div>
+</div>
+<div id="modalAlert" class="modal-item">
+    <div class="close-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+    </div>
+
+    <div class="modal-content modal-category">
+        <div class="modal-header">
+            <p class="modal-text">Maintenance</p>
+        </div>
+        <div class="modal-items">
+            <div class="modal-additem__content" id="results">
+
+            </div>
+        </div>
+        <div class="modal-save__container">
+            <button class="btn-save__modal" id="close_result">Close</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
+<script src="/static/jquery/jquery.3.1.6.min.js"></script>
+<script src="/static/js/common.js"></script>
+<script src="/static/assets/js/validator.js"></script>
+<script src="/static/js/maintenance.js"></script>
+
+<script>
+    // *Image scanner hide/show
+    $('#startButton').on('click', function () {
+        $('.img-scan').addClass('show-scanner')
+    })
+
+    $('#resetButton').on('click', function () {
+        $('.img-scan').removeClass('show-scanner')
+    })
+</script>
+{{end}}

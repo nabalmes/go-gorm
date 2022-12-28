@@ -1,0 +1,209 @@
+{{define "title"}}
+<title>{{.Title}}</title>
+{{end}}
+
+{{define "content"}}
+<link rel="stylesheet" href="../static/assets/css/validator.css">
+<div class="deliveries-add__modal dashboard-modal">
+    <div class="modal-container deliveries-modal__container">
+        <div class="modal-image">
+            <img src="../static/assets/images/header.png" alt="">
+            <h2>Create Deliveries</h2>
+            <h6>Fill out the form below to add deliveries.</h6>
+        </div>
+        <div class="image-container">
+            <img src="../static/assets/images/globe-land.png" alt="globe land" class="login-image__1">
+            <img src="../static/assets/images/globe-line.png" alt="globe line" class="login-image__2 rotate-center">
+            <img src="../static/assets/images/globe-line2.png" alt="globe line 2"
+                class="login-image__3 rotate-in-center">
+        </div>
+        <div class="modal-form__container">
+            <div class="form-wrapper tag_id-wrapper">
+                <label for="tag_id">Tag ID</label>
+                <select class="employee-input" name="tag_id" id="tag_id" required>
+                    <option value=""></option>
+                </select>
+                <small>Please complete this required field</small>
+            </div>
+            <div class="modal-form__del">
+                <div class="form-wrapper client-wrapper">
+                    <label for="name">Full Name / Item Name</label>
+                    <p class="deliveries-details">Jethrow</p>
+                    <small>Please complete this required field</small>
+                </div>
+
+                <div class="form-wrapper desc-wrapper">
+                    <label for="description">Description</label>
+                    <p class="deliveries-details">This is a description</p>
+                    <small>Please complete this required field</small>
+                </div>
+
+                <div class="form-wrapper code-wrapper">
+                    <label for="address">Address</label>
+                    <p class="deliveries-details">Batangas</p>
+                    <small>Please complete this required field</small>
+                </div>
+
+                <div class="form-wrapper longitude-wrapper">
+                    <label for="longitude">Longitude</label>
+                    <p class="deliveries-details">34.134123</p>
+                    <small>Please complete this required field</small>
+                </div>
+
+                <div class="form-wrapper latitude-wrapper">
+                    <label for="latitude">Latitude</label>
+                    <p class="deliveries-details">87.123123</p>
+                    <small>Please complete this required field</small>
+                </div>
+            </div>
+        </div>
+        <div class="button-container">
+            <div id="deliveries-cancel" class="modal-btn cancel-btn">
+                Cancel
+            </div>
+            <button id="deliveries-save" class="modal-btn save-btn">
+                Save
+            </button>
+        </div>
+    </div>
+</div>
+<div class="start-add__modal dashboard-modal">
+    <div class="modal-container start-modal__container">
+        <div class="mobile-content">
+            <!-- *Decode Style -->
+            <div class="decode-style">
+                <select id="decoding-style" size="1" class="decoding-dropdown mobile-decoding">
+                    <option value="once">Decode once</option>
+                    <option value="continuously">Decode continuously</option>
+                </select>
+            </div>
+            <!-- *Scanner -->
+            <div class="scanner-mobile__wrapper">
+                <img class="img-scan" src="/static/assets/img/scangif4.gif" alt="">
+                <video id="video" class="scanner-mobile" src=""></video>
+            </div>
+
+            <!-- *Buttons -->
+            <div class="mobile-btns">
+                <div id="sourceSelectPanel" class="video-source">
+                    <select id="sourceSelect" class="btn-save__modal mobile-btn">
+                        <option value="" selected="selected" disabled="disabled">Camera View</option>
+                    </select>
+                </div>
+
+                <button id="startButton" class="btn-save__modal mobile-btn">Scan QR</button>
+                <button id="resetButton" class="btn-save__modal mobile-btn">Close Camera</button>
+            </div>
+        </div>
+        <div class="button-container">
+            <div id="start-cancel" class="modal-btn cancel-btn">
+                Cancel
+            </div>
+            <button id="start-save" class="modal-btn save-btn">
+                Save
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- *View Modal -->
+<div class="view-modal">
+    <div class="view-modal__container start-modal__container">
+        <div class="view-header">
+            <h3>Courier</h3>
+        </div>
+        <div class="view-content">
+            <div class="view-body">
+                <!-- * Details will append here -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="section-header">
+    Courier
+</div>
+<div class="search-bar" data-aos="fade-left" data-aos-duration="500">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#483c3c"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input type="text" placeholder="Search" id="search">
+    <button onclick="Search()">Search</button>
+</div>
+<div class="section-deliveries section-cards__container" id="data">
+    {{range .Deliveries}}
+    <div class="cards-wrapper reveal">
+        <div class="cards-header">
+            <h4>{{.ReferenceID}}</h4>
+        </div>
+        <div class="card-details">
+
+            <div class="code-name-details card-detail">
+                <h5>Name:</h5>
+                <h4>{{.Location.Name}}</h4>
+            </div>
+
+            <div class="status-name-details card-detail">
+                <h5>Status:</h5>
+                <h4>{{.Status}}</h4>
+            </div>
+        </div>
+        <div class="buttons-container">
+            <button class="view-maintenance view-modal__btn" onclick="viewDetail({{.ID}})">View</button>
+            <!-- <button id="end-btn">End</button> -->
+        </div>
+    </div>
+    {{end}}
+    <div class="add-delivery__btn dashboard-add__btn bounce-top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#ffffff"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+    </div>
+</div>
+<div id="modalAlert" class="modal-item">
+    <div class="close-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+    </div>
+
+    <div class="modal-content modal-category">
+        <div class="modal-header">
+            <p class="modal-text">Package Delivered</p>
+        </div>
+        <div class="modal-items">
+            <div class="modal-additem__content" id="results">
+
+            </div>
+        </div>
+        <div class="modal-save__container">
+            <button class="btn-save__modal" id="close_result">Close</button>
+        </div>
+    </div>
+</div>
+<script src="/static/jquery/jquery.3.1.6.min.js"></script>
+<script src="/static/js/common.js"></script>
+<script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
+<script src="/static/assets/js/validator.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"
+    integrity="sha256-AdQN98MVZs44Eq2yTwtoKufhnU+uZ7v2kXnD5vqzZVo=" crossorigin="anonymous"></script>
+<script src="/static/js/deliveries.js"></script>
+
+<script>
+    // *Image scanner hide/show
+    $('#startButton').on('click', function () {
+        $('.img-scan').addClass('show-scanner')
+    })
+
+    $('#resetButton').on('click', function () {
+        $('.img-scan').removeClass('show-scanner')
+    })
+</script>
+{{end}}

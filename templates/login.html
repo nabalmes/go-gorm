@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="integritynet">
+  <meta name="description" content="pudding mobile">
+  <meta name="keywords" content="software engineering, software development, web development, software, web, engineering, development, developer, designer, user interface, user experience, developer relation, product design, web design, design, design system, system, React, framework, Svelte, vanilla, javascript, html, css, node, philippines, batangas, computer science">
+
+  <meta property="og:title" content="pudding mobile">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="../static/assets/img/pudding-logo">
+  <meta property="og:url" content="">
+  <meta property="og:description" content="A pudding mobile app monitoring">
+  
+  <link rel="stylesheet" href="../static/assets/css/login_index.css">
+  <title>{{.Title}}</title>
+</head>
+<body>
+  <section class="login-section">
+    <div class="header-logo">
+      <img src="../static/assets/images/Vector.png" alt="">
+    </div>
+    <div class="header-container">
+      <h1 id="login-header">Login to <br>your account</h1>
+    </div>
+    <div id="login-form">
+      <form id="login-wrapper" autocomplete="off" method="post">
+        <div class="username-container">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" autocomplete="off">
+        </div>
+        {{ if ne .err_username "" }}
+          <small>{{ .err_username }}</small>
+        {{ end }}
+        <div class="password-container">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="passwordd" autocomplete="off">
+          <div class="toggle-password"></div>
+        </div>
+        {{ if ne .err_password "" }}
+          <small>{{ .err_password }}</small>
+        {{ end }}
+        <button>Sign In</button>
+      </form>
+    </div>
+  </section>
+
+</body>
+
+<script>
+  // This is for the password visibility on login
+var togglePassword = document.querySelector(".toggle-password");
+
+togglePassword.addEventListener('click', function(){
+    togglePassword.classList.toggle('showing');
+
+    const password = document.getElementById('passwordd');
+    password.type = password.type === "password"
+    ? "text"
+    : "password"
+   
+})
+</script>
+
+</html>

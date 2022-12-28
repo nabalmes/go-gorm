@@ -1,0 +1,142 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+body{
+  background-image: url(../images/loginbg.png);
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  height: 100vh;
+  
+}
+
+.login-section {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+  justify-content: center;
+}
+
+input {
+  outline: none;
+}
+.header-logo{
+  /* position: absolute;
+  top: 0; */
+
+  width: 100%;
+
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-logo img {
+  width: clamp(320px, 34vw, 350px);
+}
+
+.header-container{
+  display: flex;
+  align-content: center;
+  justify-content: flex-start;
+  padding-left: 20px;
+  align-items: center;
+}
+
+.header-container>img{
+  margin: none;
+  width: 90%;
+}
+
+#login-form {
+  padding: 0 20px 0 20px;
+}
+
+
+#login-header{
+  font-weight: 400;
+  font-size: clamp(28px, 6vw, 36px);
+  letter-spacing: 1.6px;
+  text-decoration: none;
+}
+#login-wrapper{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.username-container,
+.password-container  {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  align-items: baseline;
+}
+
+.toggle-password {
+  background: url(../images/svg/hide.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  filter: contrast(0.5);
+  height: 20px;
+  width: 35px;
+}
+
+.toggle-password.showing {
+  background: url(../images/svg/visible.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.username-container>label,
+.password-container>label{
+  margin-top: 2rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.username-container>input[type='text'], .password-container>input[type='password'],.password-container>input[type='text']{
+  height: 2.5rem;
+  border: none;
+  border-bottom: solid #6a67674d 1px;
+  font-size: 16px;
+  background: transparent;
+  padding: 10px;
+
+  width: 100%;
+}
+
+#login-wrapper>button{
+  margin: 2rem 0 2rem 0;
+  height: 46px;
+  border-radius: 20px;
+  background-color: #27A8DA;
+  border: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: white;
+}
+
+small{
+  color: red;
+}
+

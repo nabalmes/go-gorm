@@ -1,0 +1,79 @@
+{{ define "title" }}
+<title>{{ .Title }}</title>
+{{ end }}
+{{ define "content" }}
+
+<div class="location-add__modal dashboard-modal">
+    <div class="modal-container location-modal__container">
+        <div class="modal-image">
+            <img src="../static/assets/images/delivery.jpg" alt="">
+            <h2>Create New Location</h2>
+            <h6>Fill out the form below to add location.</h6>
+        </div>
+        <div class="image-container">
+            <img src="../static/assets/images/globe-land.png" alt="" class="login-image__1">
+            <img src="../static/assets/images/globe-line.png" alt="" class="login-image__2 rotate-center">
+            <img src="../static/assets/images/globe-line2.png" alt="" class="login-image__3 rotate-in-center">
+        </div>
+        <div class="modal-form__container">
+            <div class="form-wrapper location-wrapper">
+                <label for=" location">Location</label>
+                <input type="text" name="location" id="location">
+            </div>
+            <div class="form-wrapper location-wrapper">
+                <label for=" description">Description</label>
+                <input type="text" name="description" id="description">
+            </div>
+        </div>
+        <div class="button-container">
+            <div id="location-cancel" class="modal-btn cancel-btn">
+                Cancel
+            </div>
+            <button id="location-save" class="modal-btn save-btn">
+                Save
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="section-header">
+    LOCATION
+</div>
+<div class="search-bar">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#483c3c"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input type="text" placeholder="Search location here">
+    <button>SEARCH</button>
+</div>
+<div class="section-location section-cards__container">
+    {{ range .Location }}
+    <div class="cards-wrapper">
+        <div class="form-wrapper location-wrapper">
+            <label for=" location">Location</label>
+            <input type="text" name="location" readonly value="{{ .Name }}">
+        </div>
+        <div class="form-wrapper location-wrapper">
+            <label for=" description">Description</label>
+            <textarea name="description" cols="10" rows="3" readonly>{{ .Description }}</textarea>
+        </div>
+    </div>
+    {{ end }}
+
+
+    <div class="add-location__btn dashboard-add__btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#ffffff"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+    </div>
+</div>
+
+<!-- * Scripts for the location -->
+<script src="/static/jquery/jquery.3.1.6.min.js"></script>
+<script src="/static/js/common.js"></script>
+<script src="/static/js/location.js"></script>
+{{ end }}

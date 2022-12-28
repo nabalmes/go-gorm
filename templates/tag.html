@@ -1,0 +1,140 @@
+{{define "title"}}
+<title>Tag Settings | Pudding</title>
+{{end}}
+{{define "content"}}
+<div class="tag-add__modal dashboard-modal">
+    <div class="modal-container tag-modal__container">
+        <div class="modal-image">
+            <img src="../static/assets/images/header.png" alt="">
+            <div class="editing-img"></div>
+            <h2 class="tag-header">Create tag</h2>
+            <h6 class="tag-header__desc">Fill out the form below to add Tag.</h6>
+        </div>
+        <div class="image-container">
+            <img src="../static/assets/images/globe-land.png" alt="globe-land" class="login-image__1">
+            <img src="../static/assets/images/globe-line.png" alt="globe-line" class="login-image__2 rotate-center">
+            <img src="../static/assets/images/globe-line2.png" alt="globe-line2"
+                class="login-image__3 rotate-in-center">
+        </div>
+        <div class="modal-form__container">
+            <div class="form-wrapper machineID-wrapper">
+                <label for="machineID">Tag ID</label>
+                <input class="employee-input" id="machineID" type="text" name="machineID" required>
+                <small>Please complete this required field</small>
+            </div>
+
+            <div class="form-wrapper timezone-wrapper">
+                <label for="timezone">Type</label>
+                <select class="employee-input" name="tag_type" id="tag_type" required>
+                    <option value=""></option>
+                    <option value="1">Courier</option>
+                    <option value="2">Maintenance</option>
+                </select>
+                <small>Please complete this required field</small>
+            </div>
+
+
+            <div class="form-wrapper client-wrapper">
+                <label for="name">Name</label>
+               <input class="employee-input" id="name" type="text" name="name" required>
+               <small>Please complete this required field</small>
+            </div>
+            
+            <div class="form-wrapper desc-wrapper">
+                <label for="description">Description</label>
+                <textarea class="employee-input" id="description" name="description" cols="4" rows="4" required></textarea>
+                <small>Please complete this required field</small>
+            </div>
+    
+            <div class="form-wrapper code-wrapper">
+                <label for="address">Address</label>
+                <input class="employee-input" id="address" type="text" name="address" required>
+                <small>Please complete this required field</small>
+            </div>
+            
+            <div class="form-wrapper longitude-wrapper">
+                <label for="longitude">Longitude</label>
+                <input class="employee-input" id="longitude" type="text" name="longitude" required>
+                <small>Please complete this required field</small>
+            </div>
+    
+            <div class="form-wrapper latitude-wrapper">
+                <label for="latitude">Latitude</label>
+                <input class="employee-input" id="latitude" type="text" name="latitude" required>
+                <small>Please complete this required field</small>
+            </div>
+    
+            <!-- <div class="form-wrapper country-wrapper">
+                <label for="country">Country</label>
+                <input id="country" type="text" name="country" required>
+                <small>Please complete this required field</small>
+            </div> -->
+
+            <div class="form-wrapper timezone-wrapper">
+                <label for="timezone">Time Zone</label>
+                <select class="employee-input" name="timezone" id="timezone" required>
+                    <option value=""></option>
+                </select>
+                <small>Please complete this required field</small>
+            </div>
+        </div>
+        <div class="button-container">
+            <div id="tag-cancel" class="modal-btn cancel-btn">
+                Cancel
+            </div>
+            <button id="tag-save" class="modal-btn save-btn">
+                Save
+            </button>
+        </div>
+    </div>
+</div>
+<div class="section-header">
+    Tag Settings
+</div>
+<div class="search-bar">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#483c3c"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input id="search-bar" type="text" placeholder="Search">
+    <button id="employee-search-btn">SEARCH</button>
+</div>
+<div class="section-tag section-cards__container">
+    {{range .Tag}}
+        <div class="cards-wrapper-tag reveal">
+            <div class="tag-card-header-container">
+                <h3>TAG ID</h3>
+                <div class="cards-edit__btn" onclick="editTag('{{.ID}}')">
+                    <svg width="35" height="35" fill="none" stroke="#383333" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="m4.75 19.25 4.25-1 9.293-9.293a1 1 0 0 0 0-1.414l-1.836-1.836a1 1 0 0 0-1.414 0L5.75 15l-1 4.25Z"></path>
+                        <path d="M19.25 19.25h-5.5"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="card-details">
+                <div class="machineID-details card-detail machine-id">
+                    <h4 class="card-details__machineID machine-id__fs">{{.MachineID}}</h4>
+                </div>
+
+                <div>
+                    <h4 class="card-details__machineID machine-id__fs">{{.Location.Name}}</h4>
+                </div>
+            </div>
+        </div>
+    {{end}}
+       
+    <div class="add-tag__btn dashboard-add__btn bounce-top" onclick="createTag()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#ffffff"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+    </div>
+</div>
+
+<script src="/static/jquery/jquery.3.1.6.min.js"></script>
+<script src="../static/js/common.js"></script>
+<script src="../static/js/tag.js"></script>
+
+{{end}}

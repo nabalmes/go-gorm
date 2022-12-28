@@ -1,0 +1,139 @@
+{{ define "title" }}
+<title>{{ .Title }}</title>
+{{ end }}
+{{ define "content" }}
+ <!-- *View Modal -->
+ <div class="view-modal">
+    <div class="view-modal__container start-modal__container">
+        <div class="view-header">
+            <h3>Details</h3>
+        </div>
+        <div class="view-content">
+            <div class="view-body">
+                <div class="card-details">
+                    <!-- * Report details will append here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-header">
+    REPORTS
+</div>
+<div class="section-maintenance__report section-cards__container">
+    <div class="dashboard-header__filter">
+        <!-- *Header Filter Button -->
+        <div class="dropdown-items">
+            <button class="dropbtn-items">Filter</button>
+            <div class="dropdown-content__items">
+                <div class="dashboard-filter__category">
+                    <label for="filterby" class="headerfilter-text">Filter by:</label>
+                    <select name="filterby" id="filterby" class="status-select">
+                        <option value="" selected="selected">Select Category</option>
+                        <option value="courier">Courier</option>
+                        <option value="maintenance">Maintenance</option>
+                    </select>
+                </div>
+
+                <div class="dashboard-filter__category">
+                    <label for="select-tag" class="headerfilter-text">Tag:</label>
+                    <select name="select-tag" id="select-tag" class="status-select">
+                        <option value="0" selected="selected">Select Tag</option>
+                    </select>
+                </div>
+
+                <div class="dashboard-filter__category">
+                    <label for="status" class="headerfilter-text">Status:</label>
+                    <select name="status" id="status" class="status-select">
+                        <option value="0" selected="selected">Select Status</option>
+                    </select>
+                </div>
+                <div class="dashboard-filter__category">
+                    <label for="type" id="type-label" class="headerfilter-text">Type:</label>
+                    <select name="type" id="type" class="status-select">
+                        <option value="0" selected="selected">Select Type</option>
+                    </select>
+                </div>
+
+                <div class="dashboard-filter__date">
+                    <div class="dashboard-filter__category">
+                        <label for="type" class="headerfilter-text">Date:</label>
+                    </div>
+                    <div class="dashboard-filter__category">
+                        <label for="type" class="headerfilter-text">From:</label>
+                        <input type="date" id="date_from" class="status-select">
+                    </div>
+                    <div class="dashboard-filter__category">
+                        <label for="type" class="headerfilter-text">To:</label>
+                        <input type="date" id="date_to" class="status-select">
+                    </div>
+                </div>
+
+                <button class="search-dropdown" onclick="ApplyFilter()">Apply filter</button>
+            </div>
+        </div>
+    </div>
+    <div class="table-container">
+        <table id="tag-table" class="tbl-design">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Tag ID</th>
+                    <th>Category</th>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Status</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody class="tbl-content__design">
+                <!--* Appending of Reports -->
+            </tbody>
+        </table>
+    </div>
+
+    <div id="filter_total">
+        <nav class="page-nav" aria-label="Page navigation example">
+            <ul class="pagination-order mb-0">
+                <div class="page-link" aria-label="Previous" id="scrollpageRight">
+                    <span class="chevron" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-chevrons-left">
+                            <polyline points="11 17 6 12 11 7"></polyline>
+                            <polyline points="18 17 13 12 18 7"></polyline>
+                        </svg></span>
+                    <!-- <span class="sr-only">Previous</span> -->
+                </div>
+
+                <p id="nav-page" class="page-item pagination-order__orders my-0"></p>
+
+                <div class="page-link" aria-label="Next" id="scrollpageLeft">
+                    <span class="chevron" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-chevrons-right">
+                            <polyline points="13 17 18 12 13 7"></polyline>
+                            <polyline points="6 17 11 12 6 7"></polyline>
+                        </svg></span>
+                    <!-- <span class="sr-only">Next</span> -->
+                </div>
+            </ul>
+        </nav>
+        <div id="filt_order"></div>
+    </div>
+</div>
+
+<script src="/static/jquery/jquery.3.1.6.min.js"></script>
+<script src="/static/js/common.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js" integrity="sha256-AdQN98MVZs44Eq2yTwtoKufhnU+uZ7v2kXnD5vqzZVo=" crossorigin="anonymous"></script>
+<script src="/static/js/reports.js"></script>
+
+<script>
+    $(document).ready(function () {
+        Page_Reports();
+        Report(1);
+    });
+</script>
+{{ end }}

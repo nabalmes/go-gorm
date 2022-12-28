@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="integritynet">
+  <meta name="description" content="pudding mobile">
+  <meta name="keywords"
+    content="software engineering, software development, web development, software, web, engineering, development, developer, designer, user interface, user experience, developer relation, product design, web design, design, design system, system, React, framework, Svelte, vanilla, javascript, html, css, node, philippines, batangas, computer science">
+
+  <meta property="og:title" content="pudding mobile">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="../static/assets/img/pudding-logo">
+  <meta property="og:url" content="">
+  <meta property="og:description" content="A pudding mobile app monitoring">
+
+  {{template "title" .}}
+
+  <link rel="shortcut icon" type="image/png" href="../static/assets/images/logo.svg">
+
+
+  <link rel="stylesheet" href="../static/assets/css/login.css">
+  <link rel="stylesheet" href="../static/assets/css/login_index.css">
+  <link rel="stylesheet" href="../static/assets/css/dashboard.css">
+
+  <link href="../static/assets/css/plugins/aos.css" rel="stylesheet">
+  <link href="../static/assets/css/plugins/center-simple.css" rel="stylesheet">
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+  <div id="preloader">
+    <div class="logo-loader">
+      <img src="../static/assets/images/PNG-Logo-horizontal.png" alt="">
+    </div>
+
+    <div id="loader"></div>
+  </div>
+
+  <header class="pudding-dashboard__header">
+    <div class="wrapper">
+      <div class="notification">
+        <i class="fa fa-bell-o"></i>
+        <div class="notify-count count1 common-count" count="0">
+          <div class="value"></div>
+        </div>
+      </div>
+      <div class="notification-dropdown dd">
+        <div class="arrow-up"></div>
+        <div class="header">
+          <div class="container">
+            <!-- append here -->
+            <div class="text fl" id="notif_parent">
+              <h3>Notifications</h3>
+            </div>
+
+            <!-- end of appending -->
+          </div>
+        </div>
+        <div class="items">
+
+        </div>
+      </div>
+    </div>
+    <a href="/pudding/dashboard">
+      <img src="../static/assets/images/PNG-Logo-horizontal.png" alt="logo">
+    </a>
+
+    <div class="navbar__toggle" id="mobile-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+    <div class="navbar__menu">
+      <a class="navbar__welcome"> <img src="/static/assets/images/SVG-Logo-Icon-only.svg" alt="">  Welcome {{.user.FirstName}}!</a>
+      <a href="/pudding/dashboard" class="navbar__link" id="dashboard">Dashboard</a>
+      <a href="/pudding/deliveries" class="navbar__link" id="deliveries">Courier</a>
+      <a href="/pudding/maintenance" class="navbar__link" id="maintenance">Maintenance</a>
+      <a href="/pudding/reports" class="navbar__link" id="reports">Reports</a>
+      <a href="/pudding/employee" class="navbar__link" id="employee">Employee</a>
+      <a href="/pudding/tag" class="navbar__link" id="tag">Tag Settings</a>
+      <a href="/logout" class="navbar__link">Log Out</a>
+    </div>
+  </header>
+
+  <section class="dashboard-section">
+    <div class="overlay"></div>
+    <!-- Content Append Here -->
+    {{template "content" .}}
+  </section>
+
+</body>
+<script src="/static/jquery/jquery.3.1.6.min.js"></script>
+<script src="../static/assets/js/interaction.js"></script>
+<script src="../static/assets/js/plugins/pace.js"></script>
+<script src="../static/assets/js/plugins/aos.js"></script>
+
+<script src="../static/js/common.js"></script>
+
+
+<script>
+  window.onload = function () {
+    AppendNotif()
+    setInterval(AppendNotif, 100000)
+  }
+  $(window).on('load', function () {
+    setInterval(function () {
+      $("#preloader").addClass("fadeout")
+      AOS.init();
+    }, 500)
+
+
+  })
+  // Hide navbar link and add button based on employee type
+  var employeeType = getCookie("employee_type")
+  if (employeeType == 2) {
+    // Deliveries
+    $(".add-delivery__btn").hide()
+    $("#maintenance").hide()
+    $("#reports").hide()
+    $("#employee").hide()
+    $("#tag").hide()
+    $("#maintenance-swiper").hide()
+  } else if (employeeType == 3) {
+    // Maintenance
+    $(".add-maintenance__btn").hide()
+    $("#deliveries").hide()
+    $("#reports").hide()
+    $("#employee").hide()
+    $("#tag").hide()
+    $("#deliveries-swiper").hide()
+  }
+
+  //Notification
+  $(document).ready(function () {
+    // click on notification bell
+    $('.notification').click(function () {
+      if (!$(document).find('.notification-dropdown').hasClass('dd')) {
+        hide_dropdown()
+      } else {
+        $('.notification-dropdown').removeClass('dd').addClass('dropdown-transition')
+        set_notification($('#notif_parent > .active').length)
+      }
+    })
+    // handler to close dropdown on clicking outside of it
+    $(document).on('click', function (e) {
+      var target = $(e.target)
+      if (!target.closest('.notification').length && !target.closest('.dropdown-transition').length) {
+        if (!$(document).find('.notification-dropdown').hasClass('dd')) {
+          hide_dropdown()
+        }
+      }
+    })
+
+    // function to close dropdown and setting notification count to 0
+    function hide_dropdown() {
+      $(document).find('.notification-dropdown').removeClass('dropdown-transition').addClass('dd')
+      $(document).find('.notification-dropdown').find('.list-item').addClass('background-white')
+      set_notification($('#notif_parent > .active').length)
+    }
+  })
+
+  function set_notification(count) {
+    $(document).find('.notify-count').attr('count', count)
+    $(document).find('.notify-count .value').text(count)
+    if (count > 0) {
+      document.title = '(' + count + ') - Pudding notification'                // adding notification count in window title, incase the user is on some other tab.
+    } else {
+      document.title = 'Pudding notification'
+    }
+  }
+
+  // This is for the burger nav
+  const menu = document.getElementById('mobile-menu');
+  const menuLinks = document.querySelector('.navbar__menu');
+  const navLogo = document.getElementById('navbar__logo');
+  const body = document.querySelector('body');
+
+  // Display menu - Mobileview
+  const mobileMenu = function () {
+    menu.classList.toggle('is-active');
+    menuLinks.classList.toggle('active');
+    body.classList.toggle('active')
+  }
+  menu.addEventListener('click', mobileMenu)
+
+  // reveal content
+  var sectionCards = document.querySelector(".section-cards__container")
+  window.addEventListener('load', reveal);
+
+  function reveal() {
+    var reveals = document.querySelectorAll('.reveal');
+    for (var i = 0; i < reveals.length; i++) {
+      reveals[i].classList.add('active');
+    }
+  }
+
+  // var swiper = new Swiper(".mySwiper", {
+  //   slidesPerView: 4,
+  //   spaceBetween: 30,
+  //   centeredSlides: true,
+  //   pagination: {
+  //     el: ".swiper-pagination",
+  //     clickable: true,
+  //   },
+  // });
+
+
+  var allDashboard = document.querySelector(".dashboard-modal")
+  var allModalContainer = document.querySelectorAll(".modal-container")
+  allDashboard.addEventListener("click", function () {
+    var target = $(event.target);
+    if (target.is(".dashboard-modal")) {
+      target.removeClass('show');
+      allModalContainer.forEach(function (e) {
+        e.classList.remove("show")
+      })
+    }
+  })
+
+  function AppendNotif() {
+    $('#notif_parent').empty()
+    $('#notif_parent').append(`
+      <h3>Notifications</h3>
+    `)
+    $.ajax({
+      method: "POST",
+      url: "/admin/api/d/notification/read/?seen=false",
+      success: function (resp) {
+        let notifications = JSON.parse(resp)['result']
+        $.each(notifications, function (_, v) {
+          $('#notif_parent').append(`
+            <div class="notif-content active" id="notif-`+ v.ID + `" onclick="RemoveClass(` + v.ID + `)">
+              <div class="badge"></div>
+              <p class="notification-desc">`+ v.Description + `</p>
+            </div>
+          `)
+        })
+      }
+    })
+  }
+
+  function CheckNotif(){
+    if ($('#notif_parent').children().length == 0) {
+      $('#notif_parent').append(`
+        <div class="notif-content">
+          <p class="notification-desc">No active notifications</p>
+        </div>
+      `)
+    }
+  }
+  function RemoveClass(id) {
+    let token = getCookie('session')
+    $.ajax({
+      method: "POST",
+      url: "/admin/api/d/notification/edit/" + id + "/?_seen=1&x-csrf-token=" + token,
+      success: function () {
+        $("#notif-" + id).removeClass("active");
+        $("#notif-" + id).children(".badge").remove()
+        set_notification($('#notif_parent > .active').length)
+      }
+    })
+  }
+
+
+
+</script>
+
+</html>
